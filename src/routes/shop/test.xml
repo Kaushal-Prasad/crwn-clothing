@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<wsdl:definitions name="OCexampleApi" targetNamespace="http://www.example.org/OCexampleApi/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.example.org/OCexampleApi/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.example.org/OCexampleApi/">
+			<xsd:element name="checkMSISDN">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="TID" type="xsd:int" minOccurs="1" maxOccurs="1" />
+						<xsd:element name="ACCNBR" type="xsd:string" minOccurs="1" maxOccurs="1" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="checkMSISDNResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="1" maxOccurs="1" name="rtnCode" type="xsd:int" />
+						<xsd:element minOccurs="1" maxOccurs="1" name="rtnMsg" type="xsd:string" />
+						<xsd:element name="TID" type="xsd:int" minOccurs="0" maxOccurs="unbounded" />
+						<xsd:element name="ACCNBR" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+						<xsd:element name="STATUS" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+						<xsd:element name="TOC" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+						<xsd:element name="BRAND" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+						<xsd:element name="POSTPAY" type="xsd:int" minOccurs="0" maxOccurs="unbounded" />
+						<xsd:element name="BRANDPLAN" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="sendMessage">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="vID" type="xsd:int" minOccurs="1" maxOccurs="1" />
+						<xsd:element name="vMSISDN" type="xsd:string" minOccurs="1" maxOccurs="1" />
+						<xsd:element name="vMessage" type="xsd:string" minOccurs="1" maxOccurs="1" />
+						<xsd:element name="vBusinessID" type="xsd:int" minOccurs="1" maxOccurs="1" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="sendMessageResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="1" maxOccurs="1" name="rtnCode" type="xsd:string" />
+						<xsd:element minOccurs="1" maxOccurs="1" name="rtnMsg" type="xsd:string" />
+						<xsd:element name="vID" type="xsd:int" minOccurs="0" maxOccurs="unbounded" />
+						<xsd:element name="vMSISDN" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+						<xsd:element name="vMessage" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+						<xsd:element name="vBusinessID" type="xsd:int" minOccurs="0" maxOccurs="unbounded" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="checkMSISDN">
+		<wsdl:part element="tns:checkMSISDN" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="checkMSISDNResponse">
+		<wsdl:part element="tns:checkMSISDNResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="sendMessage">
+		<wsdl:part element="tns:sendMessage" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="sendMessageResponse">
+		<wsdl:part element="tns:sendMessageResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:portType name="OCexampleApiPort">
+		<wsdl:operation name="checkMSISDN">
+			<wsdl:input message="tns:checkMSISDN" name="checkMSISDNRequest" />
+			<wsdl:output message="tns:checkMSISDNResponse" name="checkMSISDNResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="sendMessage">
+			<wsdl:input message="tns:sendMessage" name="sendMessageRequest" />
+			<wsdl:output message="tns:sendMessageResponse" name="sendMessageResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="OCexampleApiBinding" type="tns:OCexampleApiPort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"  />
+		<wsdl:operation name="checkMSISDN">
+			<soap:operation soapAction=""  />
+			<wsdl:input name="checkMSISDNRequest">
+				<soap:body parts="parameters" use="literal"  />
+			</wsdl:input>
+			<wsdl:output name="checkMSISDNResponse">
+				<soap:body parts="parameters" use="literal"  />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="sendMessage">
+			<soap:operation soapAction="" />
+			<wsdl:input name="sendMessageRequest">
+				<soap:body parts="parameters" use="literal" />
+			</wsdl:input>
+			<wsdl:output name="sendMessageResponse">
+				<soap:body parts="parameters" use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="OCexampleApi">
+		<wsdl:port binding="tns:OCexampleApiBinding" name="OCexampleApiPort">
+			<soap:address location="http://172.31.19.52:15042" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
